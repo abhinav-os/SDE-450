@@ -59,8 +59,8 @@ int main() {
     int t;
     cin >> t;
     while(t--) {
-        // adjacency_matrix();
-        // adjacency_list();
+        adjacency_matrix();
+        adjacency_list();
         weighted_adjacency_list();
     }
 }
