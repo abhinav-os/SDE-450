@@ -28,6 +28,8 @@ void adjacency_list() {
     }
 }
 
+
+
 void weighted_adjacency_list() {
     int n, m;
     cin >> n >> m;
@@ -40,7 +42,6 @@ void weighted_adjacency_list() {
         adj[u].push_back({v, wt});
         adj[v].push_back({u, wt});
     }
-
     
     for(int i = 1; i <= n; i++) {
         for(int j = 0; j < adj[i].size(); j++) {

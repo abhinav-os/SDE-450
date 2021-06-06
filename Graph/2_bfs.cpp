@@ -6,7 +6,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 void bfs(vector<vector<int> > adj) {
     int n = adj.size();
 
@@ -34,8 +33,6 @@ void bfs(vector<vector<int> > adj) {
             }
         }
     }
-
-
 }
 
 int main() {
