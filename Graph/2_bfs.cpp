@@ -22,8 +22,8 @@ void bfs(vector<vector<int> > adj) {
                 cout << cur << " ";
                 q.pop();
 
-                for(int j = 0; j < adj[i].size(); j++) {
-                    int ele = adj[i][j];
+                for(int j = 0; j < adj[cur].size(); j++) {
+                    int ele = adj[cur][j];
                     
                     if(!visited[ele]) {
                         visited[ele] = 1;
