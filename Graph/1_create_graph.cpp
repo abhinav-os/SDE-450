@@ -28,8 +28,6 @@ void adjacency_list() {
     }
 }
 
-
-
 void weighted_adjacency_list() {
     int n, m;
     cin >> n >> m;
