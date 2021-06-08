@@ -6,42 +6,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool cycle_dfs_util(vector<vector<int> > adj, vector<bool>& vis, int node, int parent) {
+    vis[node]=true;
+    for(int j = 0; j < adj[node].size(); j++) {
+        int ele = adj[node][j];
+        if(!vis[ele]) {
+            if(cycle_dfs_util(adj, vis, ele, node))
+                return true;
+        } else if(ele != parent)
+            return true;
+    }
+    return false;
+}
+
 bool cycle_dfs(vector<vector<int> > adj) {
     int n = adj.size();
     vector<bool> vis(n, false);
 
     for(int i = 1; i < n; i++) {
         if(!vis[i]) {
-            stack<pair<int, int> > s;
-            s.push({i, -1});
-            vis[i] = true;
-
-            while(!s.empty()) {
-                pair<int, int> cur = s.top();
-                s.pop();
-
-                int cur_ele = cur.first;
-                int cur_ele_parent = cur.second;
-
-                // cout << cur_ele << " " << cur_ele_parent << "\n";
-
-                for(int j = 0; j < adj[cur_ele].size(); j++) {
-                    int ele = adj[cur_ele][j];
-                    
-                    /**
-                     * if element is already visited and it's not the parent of current element,
-                     * that means there's a cycle.
-                     */
-
-                    if(vis[ele] && ele != cur_ele_parent) 
-                        return true;
-
-                    if(!vis[ele]) {
-                        s.push({ele, cur_ele});
-                        vis[ele] = true;
-                    }
-                }
-            }
+            if(cycle_dfs_util(adj, vis, i, -1))
+                return true;
         }
     }
     return false;
