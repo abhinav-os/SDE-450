@@ -1,1 +1,1 @@
-1 2 3 No Cycles
+No Cycles

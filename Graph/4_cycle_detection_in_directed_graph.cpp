@@ -6,8 +6,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool cycle_bfs(vector<vector<int> > adj) {
+/**
+ * dfs_vis contains information about current traversal(stack)
+ * if dfs_vis[ele] is true, this means ele is a part of current traversal, and hence a cycle
+ * mark dfs_vis[node] as false while returning back in traversal if cycle is not found
+ */
 
+bool cycle_dfs_util(vector<vector<int> > adj, vector<bool>& vis, vector<bool>& dfs_vis, int node) {
+    vis[node] = true;
+    dfs_vis[node] = true;
+
+    for(int j = 0; j < adj[node].size(); j++) {
+        int ele = adj[node][j];
+        if(!vis[ele]) {
+            if(cycle_dfs_util(adj, vis, dfs_vis, ele))
+                return true;
+        } else if(dfs_vis[ele]) {
+            return true;
+        }
+    }
+    dfs_vis[node] = false;
+    return false;
+}
+
+bool cycle_dfs(vector<vector<int> > adj) {
+    int n = adj.size();
+    vector<bool> vis(n, false);
+    vector<bool> dfs_vis(n, false);
+    
+    for(int i = 1; i < n; i++) {
+        if(!vis[i]) {
+            if(cycle_dfs_util(adj, vis, dfs_vis, i))    
+                return true;
+        }
+    }
+    return false;
 }
 
 int main() {
@@ -28,7 +61,7 @@ int main() {
         // adj[v].push_back(u);
     }
 
-    if(cycle_bfs(adj)) {
+    if(cycle_dfs(adj)) {
         cout << "Cycle Present";
     } else {
         cout << "No Cycles";
@@ -36,15 +69,15 @@ int main() {
 }
 
 /*
-11 10    // Number of nodes, number of edges, next 6 lines (u,v) describe that there is an edge between u,v
-1 2
-2 4
-3 5
-5 6
-6 7
+9 10    // Number of nodes, number of edges, next 6 lines (u,v) describe that there is an edge between u,v
+1 2 
+2 3
+3 4
+4 5
+6 5
+3 6
+7 2
 7 8
 8 9
-9 10
-5 10
-8 11
+9 7
 */
