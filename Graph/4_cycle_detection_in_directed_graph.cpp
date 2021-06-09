@@ -7,6 +7,47 @@
 using namespace std;
 
 /**
+ * cycle_bfs usues logic of Kahn's algorithm for topological sorting, by storing indegree
+ */
+
+bool cycle_bfs(vector<vector<int> > adj) {
+    int n = adj.size();
+    vector<int> indegree(n, 0);
+
+    for(int i = 1; i < n; i++) {
+        for(int j = 0; j < adj[i].size(); j++) {
+            indegree[adj[i][j]] += 1;
+        }
+    }
+
+    queue<int> q;
+    for(int i = 1; i < n; i++) {
+        if(indegree[i] == 0) {
+            q.push(i);
+        }
+    }
+
+    int cnt = 0;
+    while(!q.empty()) {
+        int cur = q.front();
+        cnt += 1;
+        q.pop();
+
+        for(int j = 0; j < adj[cur].size(); j++) {
+            int ele = adj[cur][j];
+            indegree[ele] -= 1;
+            if(indegree[ele] == 0) {
+                q.push(ele);
+            }
+        }
+    }
+
+    if(cnt == n-1)
+        return false;
+    return true;
+}
+
+/**
  * dfs_vis contains information about current traversal(stack)
  * if dfs_vis[ele] is true, this means ele is a part of current traversal, and hence a cycle
  * mark dfs_vis[node] as false while returning back in traversal if cycle is not found
@@ -61,7 +102,7 @@ int main() {
         // adj[v].push_back(u);
     }
 
-    if(cycle_dfs(adj)) {
+    if(cycle_bfs(adj)) {
         cout << "Cycle Present";
     } else {
         cout << "No Cycles";
