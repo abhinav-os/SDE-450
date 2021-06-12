@@ -53,7 +53,7 @@ bool cycle_bfs(vector<vector<int> > adj) {
  * mark dfs_vis[node] as false while returning back in traversal if cycle is not found
  */
 
-bool cycle_dfs_util(vector<vector<int> > adj, vector<bool>& vis, vector<bool>& dfs_vis, int node) {
+bool cycle_dfs_util(vector<vector<int>> adj, vector<bool>& vis, vector<bool>& dfs_vis, int node) {
     vis[node] = true;
     dfs_vis[node] = true;
 
@@ -102,7 +102,7 @@ int main() {
         // adj[v].push_back(u);
     }
 
-    if(cycle_bfs(adj)) {
+    if(cycle_dfs(adj)) {
         cout << "Cycle Present";
     } else {
         cout << "No Cycles";

@@ -46,7 +46,7 @@ vector<int> topological_sort_bfs(vector<vector<int> > adj) {
     return ans;
 }
 
-void topological_sort_dfs_util(vector<vector<int> > adj, vector<bool>& vis, stack<int>& s, int node) {
+void topological_sort_dfs_util(vector<vector<int>> adj, vector<bool>& vis, stack<int>& s, int node) {
     vis[node] = true;
     
     for(int j = 0; j < adj[node].size(); j++) {
@@ -97,7 +97,7 @@ int main() {
         // adj[v].push_back(u);
     }
 
-    vector<int> ans = topological_sort_bfs(adj);
+    vector<int> ans = topological_sort_dfs(adj);
     for(int i = 0; i < ans.size(); i++) 
         cout << ans[i] << " ";
 }
