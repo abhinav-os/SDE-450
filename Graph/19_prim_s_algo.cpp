@@ -96,7 +96,7 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<vector<pair<int, int>>> adj(n, vector<pair<int, int>>(m));
+    vector<vector<pair<int, int>>> adj(n, vector<pair<int, int>>());
     for(int i = 0; i < m; i++) {
         int u, v, wt;
         cin >> u >> v >> wt;       
