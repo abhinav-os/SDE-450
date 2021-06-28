@@ -1,6 +1,6 @@
 /*
     Time Complexity: O(N*N + E)
-    Space Complexity: 
+    Space Complexity: O(N)
 */
 
 /**
