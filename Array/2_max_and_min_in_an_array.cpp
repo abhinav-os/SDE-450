@@ -1,5 +1,5 @@
 /*
-    Time Complexity: O(N); Given approach takes atmost of O(3*(n-1)/2) if n is odd, and O(3*(n-2)/2 + 1) if n is odd.
+    Time Complexity: O(N); Given approach takes atmost of O(3*(n-1)/2) if n is odd, and O(3*(n-2)/2 + 1) if n is even.
     Space Complexity: O(1)
 */
 
