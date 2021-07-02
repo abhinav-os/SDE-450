@@ -40,6 +40,7 @@ int minJumps(vector<int> a) {
 
 int minJumps(vector<int> a) {
     int n = a.size();
+    
 }
 
 int main() {
