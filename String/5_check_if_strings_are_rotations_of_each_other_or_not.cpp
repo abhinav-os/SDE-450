@@ -1,6 +1,6 @@
 /*
     Time Complexity: theta(N1 + N2)
-    Space Complexity: O(N1 + N2)
+    Space Complexity: O(N1)
 */
 
 #include <bits/stdc++.h>
@@ -11,7 +11,7 @@ bool areRotations(string s1, string s2) {
         return false;
     }
 
-    string temp = s1 + s2;
+    string temp = s1 + s1;
     if(temp.find(s2) != string::npos)
         return true;
     return false;
