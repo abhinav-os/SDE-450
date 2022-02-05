@@ -6,21 +6,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct MinMax{
+struct MinMax
+{
     int min;
     int max;
 
-    MinMax(int _min, int _max) {
+    MinMax(int _min, int _max)
+    {
         min = _min;
         max = _max;
     }
 
-    MinMax() {
-
+    MinMax()
+    {
     }
 };
 
-MinMax minAndMax(vector<int> a) {
+MinMax minAndMax(vector<int> a)
+{
     MinMax ans;
 
     /*
@@ -32,22 +35,29 @@ MinMax minAndMax(vector<int> a) {
 
     int itr;
 
-    if(n&1) {
+    if (n & 1)
+    {
         ans.min = a[0];
         ans.max = a[0];
         itr = 1;
-    } else {
+    }
+    else
+    {
         ans.min = min(a[0], a[1]);
         ans.max = min(a[0], a[1]);
         itr = 2;
     }
 
-    while(itr < n-1) {
-        if(a[itr] > a[itr+1]) {
+    while (itr < n - 1)
+    {
+        if (a[itr] > a[itr + 1])
+        {
             ans.max = max(ans.max, a[itr]);
-            ans.min = min(ans.min, a[itr+1]);
-        } else {
-            ans.max = max(ans.max, a[itr+1]);
+            ans.min = min(ans.min, a[itr + 1]);
+        }
+        else
+        {
+            ans.max = max(ans.max, a[itr + 1]);
             ans.min = min(ans.min, a[itr]);
         }
 
@@ -57,16 +67,18 @@ MinMax minAndMax(vector<int> a) {
     return ans;
 }
 
-int main() {
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
 
     int n;
     cin >> n;
     vector<int> a(n);
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         cin >> a[i];
     }
 

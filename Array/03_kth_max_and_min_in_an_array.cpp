@@ -1,5 +1,5 @@
 /*
-    Time Complexity: Worst case complexity of O(N*N); Average takes O(N)
+    Time Complexity: Worst case complexity of O(N*N); Average takes O(N);
     Space Complexity: O(1)
 */
 
@@ -11,65 +11,78 @@ Modified Quick Sort to Quick Select. Pick a pivot, place it at correct position,
 #include <bits/stdc++.h>
 using namespace std;
 
-int partition(vector<int>& a, int l, int r) {
-    int x = a[r], i = l;
+/*
+Priority Queue approach, Time Cpmplexity: O(N+K*logN), Space Compexity: O(N)
+*/
 
-    for(int j = l; j < r; j++) {
-        if(a[j] <= x) {
-            swap(a[i], a[j]);
+int kthSmallestUsingPriorityQueue(vector<int> &a, int k)
+{
+    int n = a.size();
+    priority_queue<int, vector<int>, greater<int>> pq; // min heap
+    for (int i = 0; i < n; i++)
+        pq.push(a[i]);
+
+    for (int i = 0; i < k - 1; i++)
+        pq.pop();
+    return pq.top();
+}
+
+int partition(vector<int> &a, int l, int r)
+{
+    int x = a[r], i = l - 1;
+
+    for (int j = l; j <= r - 1; j++)
+    {
+        if (a[j] <= x)
+        {
             i += 1;
+            swap(a[i], a[j]);
         }
     }
-    swap(a[i], a[r]);
-    return i;
+    swap(a[i + 1], a[r]);
+    return i + 1;
 }
 
-int randomPartition(vector<int>& a, int l, int r) {
-    int n = r-l+1;
-    int pivot = rand() % n;
-    swap(a[l+pivot], a[r]);
-    return partition(a, l, r);
-}
-
-int kthSmallest(vector<int>& a, int l, int r, int k) {
-    if(k > 0 && r-l+1 >= k) {
-        // Randomly partition the array around a pivot element and get its position.
-        int pos = randomPartition(a, l, r);
-
-        if(pos-l == k-1) {
-            return a[pos];
-        } else if(pos-l > k-1) {
-            // Recurr for left subarray
-            return kthSmallest(a, l, pos-1, k);
-        } else {
-            // Recurr for right subarray
-            return kthSmallest(a, pos+1, r, k-pos-1+l);
-        }
+int kthSmallest(vector<int> &a, int k)
+{
+    int left = 0, right = a.size() - 1;
+    while (left <= right)
+    {
+        int pi = partition(a, left, right);
+        if (pi + 1 == k)
+            return a[pi];
+        else if (pi + 1 < k)
+            left = pi + 1;
+        else
+            right = pi - 1;
     }
 
-    return INT_MAX;
+    return -1;
 }
 
-pair<int, int> kthMinMax(vector<int>& a, int k) {
+pair<int, int> kthMinMax(vector<int> &a, int k)
+{
     int n = a.size();
 
-    int min = kthSmallest(a, 0, n-1, k);
-    int max = kthSmallest(a, 0, n-1, n-k+1);
-    
+    int min = kthSmallestUsingPriorityQueue(a, k);
+    int max = kthSmallestUsingPriorityQueue(a, n - k + 1);
+
     return {min, max};
 }
 
-int main() {
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
 
     int n, k;
     cin >> n;
 
     vector<int> a(n);
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         cin >> a[i];
     }
 
