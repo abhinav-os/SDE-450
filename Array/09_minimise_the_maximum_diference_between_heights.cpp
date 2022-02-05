@@ -1,5 +1,5 @@
 /*
-    Time Complexity: O(N* log N)
+    Time Complexity: O(N * log N)
     Space Complexity: O(1)
 */
 
@@ -13,14 +13,16 @@ For maximum, we can have two options, a[i]+k, a[n-1]-k
 #include <bits/stdc++.h>
 using namespace std;
 
-int minDifference_NegativeHeightAllowed(vector<int> a, int k) {
+int minDifference_NegativeHeightAllowed(vector<int> a, int k)
+{
     int n = a.size();
     sort(a.begin(), a.end());
     int ans = a.back() - a[0];
 
-    for(int i = 0; i < n-1; i++) {
-        int mini = min(a[0] + k, a[i+1] - k);
-        int maxi = max(a[i] + k, a[n-1] - k);
+    for (int i = 0; i < n - 1; i++)
+    {
+        int mini = min(a[0] + k, a[i + 1] - k);
+        int maxi = max(a[i] + k, a[n - 1] - k);
 
         ans = min(ans, maxi - mini);
     }
@@ -28,15 +30,17 @@ int minDifference_NegativeHeightAllowed(vector<int> a, int k) {
     return ans;
 }
 
-int minDifference_NegativeHeightNotAllowed(vector<int> a, int k) {
+int minDifference_NegativeHeightNotAllowed(vector<int> a, int k)
+{
     int n = a.size();
     sort(a.begin(), a.end());
     int index = lower_bound(a.begin(), a.end(), k) - a.begin();
     int ans = a.back() - a[0];
 
-    for(int i = index-1; i < n-1; i++) {
-        int mini = min(a[0] + k, a[i+1] - k);
-        int maxi = max(a[i] + k, a[n-1] - k);
+    for (int i = index - 1; i < n - 1; i++)
+    {
+        int mini = min(a[0] + k, a[i + 1] - k);
+        int maxi = max(a[i] + k, a[n - 1] - k);
 
         ans = min(ans, maxi - mini);
     }
@@ -44,17 +48,19 @@ int minDifference_NegativeHeightNotAllowed(vector<int> a, int k) {
     return ans;
 }
 
-int main() {
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
 
     int k, n;
     cin >> k >> n;
 
     vector<int> a(n);
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         cin >> a[i];
     }
 

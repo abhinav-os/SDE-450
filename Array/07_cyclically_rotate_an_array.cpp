@@ -6,32 +6,39 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void rotate_left(vector<int> a, int k) {
+void rotate_left(vector<int> a, int k)
+{
     rotate(a.begin(), a.begin() + k, a.end());
-    for(auto ele : a) {
+    for (auto ele : a)
+    {
         cout << ele << " ";
     }
     cout << endl;
 }
 
-void rotate_right(vector<int> a, int k) {
-    rotate(a.begin(), a.begin() + (a.size() - k), a.end());
-    for(auto ele : a) {
+void rotate_right(vector<int> a, int k)
+{
+    int n = a.size();
+    rotate(a.begin(), a.begin() + n - k, a.end());
+    for (auto ele : a)
+    {
         cout << ele << " ";
     }
     cout << endl;
 }
 
-int main() {
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
 
     int n;
     cin >> n;
     vector<int> a(n);
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         cin >> a[i];
     }
 
